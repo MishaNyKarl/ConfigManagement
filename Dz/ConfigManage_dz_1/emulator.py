@@ -56,7 +56,7 @@ if __name__ == "__main__":
             else:
                 print("rev: missing argument")
         elif cmd == 'du':
-            du(current_path, filesystem)
+            du(cmd_args[0], filesystem)
         elif cmd == 'exit':
             print("Exiting shell emulator...")
             sys.exit(0)

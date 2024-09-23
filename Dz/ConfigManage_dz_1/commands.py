@@ -63,9 +63,21 @@ def cd(target_path, current_path, filesystem,  home_directory="filesystem/"):
 
 
 def rev(filename, filesystem):
+
     if filename in filesystem:
-        content = filesystem[filename].decode('utf-8')
-        print(content[::-1])
+        try:
+            # Пытаемся декодировать файл как текст в UTF-8
+            content = filesystem[filename].decode('utf-8')
+            # Переворачиваем и выводим содержимое
+            print(content[::-1])
+        except UnicodeDecodeError:
+            try:
+                # Если UTF-8 не работает, пробуем как UTF-16LE
+                decoded_content = filesystem[filename].decode('utf-16le')
+                print(decoded_content[::-1])
+            except UnicodeDecodeError:
+                print(f"rev: {filename}: cannot decode file (unknown encoding)")
+                return
     else:
         print(f"rev: {filename}: No such file")
 
@@ -74,6 +86,10 @@ def du(current_path, filesystem):
     total_size = 0
     for file in filesystem:
         if file.startswith(current_path):
-            total_size += len(filesystem[file])
-    print(f"Total size: {total_size} bytes")
+            if filesystem[file] is not None:
+                total_size += len(filesystem[file])
+                print(f"Total size: {total_size} bytes")
+                return
+    print(f"du: {current_path}: No such file or directory")
+
 
