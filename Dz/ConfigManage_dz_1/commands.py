@@ -62,34 +62,40 @@ def cd(target_path, current_path, filesystem,  home_directory="filesystem/"):
         return None
 
 
-def rev(filename, filesystem):
+def rev(filename, current_path, filesystem):
 
-    if filename in filesystem:
-        try:
-            # Пытаемся декодировать файл как текст в UTF-8
-            content = filesystem[filename].decode('utf-8')
-            # Переворачиваем и выводим содержимое
-            print(content[::-1])
-        except UnicodeDecodeError:
-            try:
-                # Если UTF-8 не работает, пробуем как UTF-16LE
-                decoded_content = filesystem[filename].decode('utf-16le')
-                print(decoded_content[::-1])
-            except UnicodeDecodeError:
-                print(f"rev: {filename}: cannot decode file (unknown encoding)")
-                return
-    else:
-        print(f"rev: {filename}: No such file")
+    current_path = os.path.join(current_path + filename)
 
-
-def du(current_path, filesystem):
-    total_size = 0
     for file in filesystem:
         if file.startswith(current_path):
-            if filesystem[file] is not None:
-                total_size += len(filesystem[file])
+            try:
+                content = filesystem[file]
+                print(content[::-1])
+                return
+            except UnicodeDecodeError:
+                try:
+                    # Если UTF-8 не работает, пробуем как UTF-16LE
+                    decoded_content = filesystem[file].decode('utf-16le')
+                    print(decoded_content[::-1])
+                    return
+                except UnicodeDecodeError:
+                    print(f"rev: {file}: cannot decode file (unknown encoding)")
+                    return
+
+    print(f"rev: {filename}: No such file")
+
+
+def du(file_search, current_path, filesystem):
+    total_size = 0
+
+    current_path = os.path.join(current_path + file_search)
+    print('current_path:', current_path)
+    for file in filesystem:
+        if file.startswith(current_path):
+            if filesystem[current_path] is not None:
+                total_size += len(filesystem[current_path])
                 print(f"Total size: {total_size} bytes")
                 return
-    print(f"du: {current_path}: No such file or directory")
+    print(f"du: {file_search}: No such file or directory")
 
 
