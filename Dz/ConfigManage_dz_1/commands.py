@@ -85,17 +85,23 @@ def rev(filename, current_path, filesystem):
     print(f"rev: {filename}: No such file")
 
 
+
 def du(file_search, current_path, filesystem):
     total_size = 0
 
-    current_path = os.path.join(current_path + file_search)
-    print('current_path:', current_path)
+    current_path = os.path.join(current_path, file_search)
+
+    if current_path not in filesystem and current_path + '/' not in filesystem:
+        print(f"du: {file_search}: No such file or directory")
+        return
+
     for file in filesystem:
         if file.startswith(current_path):
-            if filesystem[current_path] is not None:
-                total_size += len(filesystem[current_path])
-                print(f"Total size: {total_size} bytes")
-                return
-    print(f"du: {file_search}: No such file or directory")
+            if filesystem[file] is not None:  # Только файлы имеют размер
+                total_size += len(filesystem[file])
+
+    print(f"Total size: {total_size} bytes")
+
+
 
 
