@@ -27,10 +27,18 @@ python emulator.py --user <your name> --host <your host> --zipfile ./filesystem.
 ```
 
 
+
 #### Пример запуска:
 ```bash
 python emulator.py --user Misha --host Desctop123 --zipfile ./filesystem.zip --logfile ./logfile.xml
 ```
+Описание ключей командной строки:
+
+    - user: Имя Пользователя
+    - host: Название компьютера пользователя
+    - zipfile: Путь к архиву с файловой системой
+    - logfile: Путь к файлу для логирования последнего сеанса
+
 
 ## Использование команд
 
@@ -41,3 +49,11 @@ python emulator.py --user Misha --host Desctop123 --zipfile ./filesystem.zip --l
     - rev <filename>: отобразить содержимое файла в обратном порядке.
     - du <path>: отобразить общий размер файлов в каталоге.
     - exit: выйти из эмулятора.
+
+## Примеры использования
+
+![img.png](src/img/screen-run-program.png)
+
+<hr />
+
+![img.png](src/img/screen-run-tests.png)
