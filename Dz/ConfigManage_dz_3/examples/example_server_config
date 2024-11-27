@@ -1,0 +1,8 @@
+-- Настройка сервера
+var server := 19216801;
+var server := ({80, 443});
+hello = dict(
+    ip = ![server_ip],
+    ports = ![server_ports],
+    active = true
+)
