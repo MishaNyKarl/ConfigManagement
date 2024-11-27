@@ -1,0 +1,10 @@
+digraph {
+	"\"com_example_example_project_jar_1_0_SNAPSHOT\"" -> "\"org_apache_commons_commons_lang3_jar_3_12_0_compile\" ;"
+	"\"com_example_example_project_jar_1_0_SNAPSHOT\"" -> "\"com_google_guava_guava_jar_31_1_jre_compile\" ;"
+	"\"com_google_guava_guava_jar_31_1_jre_compile\"" -> "\"com_google_guava_failureaccess_jar_1_0_1_compile\" ;"
+	"\"com_google_guava_guava_jar_31_1_jre_compile\"" -> "\"com_google_guava_listenablefuture_jar_9999_0_empty_to_avoid_conflict_with_guava_compile\" ;"
+	"\"com_google_guava_guava_jar_31_1_jre_compile\"" -> "\"com_google_code_findbugs_jsr305_jar_3_0_2_compile\" ;"
+	"\"com_google_guava_guava_jar_31_1_jre_compile\"" -> "\"org_checkerframework_checker_qual_jar_3_12_0_compile\" ;"
+	"\"com_google_guava_guava_jar_31_1_jre_compile\"" -> "\"com_google_errorprone_error_prone_annotations_jar_2_11_0_compile\" ;"
+	"\"com_google_guava_guava_jar_31_1_jre_compile\"" -> "\"com_google_j2objc_j2objc_annotations_jar_1_3_compile\" ;"
+}
