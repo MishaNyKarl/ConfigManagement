@@ -8,7 +8,7 @@ def sanitize_name(name: str) -> str:
 
 def fetch_dependencies(package_name: str, repository_url: str) -> Dict[str, List[str]]:
     # Анализируем зависимости
-    command = ["mvn.cmd", "dependency:tree", "-DoutputType=dot", "-DoutputFile=temp.dot",
+    command = ["mvn", "dependency:tree", "-DoutputType=dot", "-DoutputFile=temp.dot",
                f"-DrepositoryUrl={repository_url}"]
 
     subprocess.run(command, check=True)

@@ -1,1 +1,3 @@
-{}
+host:
+  name: db.local
+  port: 5432

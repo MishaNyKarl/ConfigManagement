@@ -1,6 +1,9 @@
+
+# main.py
+
 import argparse
 import yaml
-from config_parser import process_input
+from config_parser import process_input, ConfigParserError
 
 def main():
     parser = argparse.ArgumentParser(description="Парсер учебного конфигурационного языка")
@@ -8,7 +11,7 @@ def main():
     args = parser.parse_args()
 
     # Чтение входных данных
-    print("Введите текст на учебном конфигурационном языке (Ctrl+Z и Enter для завершения):")
+    print("Введите текст на учебном конфигурационном языке (Ctrl+D и Enter для завершения):")
     input_text = ""
     try:
         while True:
@@ -25,8 +28,11 @@ def main():
         with open(args.output_file, "w", encoding='utf-8') as yaml_file:
             yaml.dump(parsed_data, yaml_file, default_flow_style=False, allow_unicode=True)
         print(f"Конфигурация успешно сохранена в файл {args.output_file}")
+    except ConfigParserError as e:
+        print(f"Синтаксическая ошибка: {e}")
     except Exception as e:
         print(f"Ошибка: {e}")
 
 if __name__ == "__main__":
     main()
+
